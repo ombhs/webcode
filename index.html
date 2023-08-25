@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Model Frontend</title>
+    <style>
+        /* Reset some default styles */
+        body, h1, ul {
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Apply a background color and text color */
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Create a header with a background color and centered text */
+        header {
+            background-color: #007acc;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        /* Create a navigation menu */
+        nav {
+            background-color: #005c91;
+        }
+        
+        ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+        
+        li {
+            margin: 0.5rem;
+        }
+        
+        /* Style links in the navigation menu */
+        a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* Create a responsive layout */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Add responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+            }
+        }
+        /* Style the dice container */
+        #dice-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* Style the dice */
+        #dice {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            perspective: 1000px;
+            margin: 0 auto;
+            animation: none; /* Initially, no animation */
+        }
+
+        /* Add styles for each face of the dice */
+        .dice-face {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        /* Define keyframes for the rolling animation */
+        @keyframes roll {
+            0% {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            25% {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+            50% {
+                transform: rotateX(720deg) rotateY(720deg);
+            }
+            75% {
+                transform: rotateX(1080deg) rotateY(1080deg);
+            }
+            100% {
+                transform: rotateX(1440deg) rotateY(1440deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mobile Model</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>Welcome to Mobile Model Frontend</h2>
+        <p>This is a simple example of a mobile-friendly frontend. You can add your content here.</p>
+        <div id="dice">
+            <div class="dice-face">1</div>
+            <div class="dice-face">2</div>
+            <div class="dice-face">3</div>
+            <div class="dice-face">4</div>
+            <div class="dice-face">5</div>
+            <div class="dice-face">6</div>
+        </div>
+        <button onclick="rollDice()">Roll the Dice</button>
+    </div>
+
+    <script>
+        // JavaScript for the 3D Dice Roller application
+        function rollDice() {
+            const diceElement = document.getElementById("dice");
+            const randomNum = Math.floor(Math.random() * 6) + 1;
+
+            // Remove the animation class to reset the dice
+            diceElement.style.animation = "none";
+
+            // Trigger a reflow to apply the reset immediately
+            void diceElement.offsetWidth;
+
+            // Apply the animation class to start the roll animation
+            diceElement.style.animation = "roll 2s cubic-bezier(0.645, 0.045, 0.355, 1) forwards";
+
+            // Delay setting the dice face to the random number after the animation
+            setTimeout(() => {
+                const diceFace = document.querySelector('.dice-face');
+                diceFace.textContent = randomNum;
+            }, 2000); // Adjust the time to match the animation duration
+        }
+    </script>
+</body>
+</html>
